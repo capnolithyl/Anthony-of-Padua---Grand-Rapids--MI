@@ -79,7 +79,18 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <article <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated block attributes.
 			?>>
 	<div class="relative h-66.75 overflow-hidden bg-secondary-3">
-		<?php if ($photo_id) : ?>
+		<?php if (! $is_manual && has_post_thumbnail($staff_id)) : ?>
+			<?php
+			echo get_the_post_thumbnail(
+				$staff_id,
+				'large',
+				array(
+					'class'   => 'absolute inset-0 h-full w-full object-cover',
+					'loading' => 'lazy',
+				)
+			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated attachment markup.
+			?>
+		<?php elseif ($photo_id) : ?>
 			<?php
 			echo wp_get_attachment_image(
 				$photo_id,
