@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-image-buttons",
+	"title": "SAOP Image Buttons",
+	"description": "Linked image cards with overlay text.",
+	"category": "saop",
+	"icon": "format-gallery",
+	"keywords": ["cards", "images", "links"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

@@ -1,0 +1,80 @@
+/**
+ * Add your design tokens as Tailwind theme variables.
+ *
+ * https://tailwindcss.com/docs/theme
+ */
+
+/**
+ * Your theme variables are merged with Tailwind’s defaults, either extending
+ * the default theme with new variables or overriding the values of existing
+ * variables.
+ */
+@theme {
+	/**
+	 * These theme variables use CSS variables set by WordPress using values
+	 * from your `theme.json` file.
+	 *
+	 * If you are using the classic editor, you should use hardcoded color
+	 * values instead of the `var()` functions below.
+     */
+	--color-background: var(--wp--preset--color--background);
+	--color-foreground: var(--wp--preset--color--foreground);
+	--color-primary-1: var(--wp--preset--color--primary-1);
+	--color-primary-2: var(--wp--preset--color--primary-2);
+	--color-secondary-1: var(--wp--preset--color--secondary-1);
+	--color-secondary-2: var(--wp--preset--color--secondary-2);
+	--color-secondary-3: var(--wp--preset--color--secondary-3);
+	--color-secondary-4: var(--wp--preset--color--secondary-4);
+	--color-secondary-5: var(--wp--preset--color--secondary-5);
+	--color-secondary-6: var(--wp--preset--color--secondary-6);
+	--color-accent-1: var(--wp--preset--color--accent-1);
+	--color-accent-2: var(--wp--preset--color--accent-2);
+	--color-accent-3: var(--wp--preset--color--accent-3);
+	--container-wide: var(--wp--style--global--wide-size);
+	--container-mid: var(--wp--style--global--mid-size);
+	--container-narrow: var(--wp--style--global--narrow-size);
+
+	/**
+	 * These are the default `font-family` theme variables included with
+     * Tailwind. You can update them below by adding custom fonts at the
+	 * beginning of each value.
+	 *
+	 * Default theme variables can be found in their entirety at the links
+	 * below, on GitHub or in Tailwind’s documentation, respectively:
+	 *
+	 * https://github.com/tailwindlabs/tailwindcss/blob/main/packages/tailwindcss/theme.css
+	 * https://tailwindcss.com/docs/theme#default-theme-variable-reference
+	 */
+	--font-sans:
+		"Public Sans", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji";
+	--font-heading: "Rambla", var(--font-sans);
+	--font-accent: "Ink Free", "Comic Sans MS", cursive;
+	--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-mono:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
+
+	/**
+	 * Add your theme below:
+	 */
+	--default-transition-duration: 350ms;
+
+	--text-shadow-md: 0 4px 4px rgba(0, 0, 0, 0.25);
+	--shadow-md: 0 4px 4px rgba(0, 0, 0, 0.25);
+	--shadow-featured-links: -275px -212px 250px 64px rgba(255, 255, 255, 0.82)
+		inset;
+
+	--text-sm: 0.9375rem;
+	--text-4-5xl: 2.5rem;
+	--text-6xl: 4rem;
+	--text-8xl: 5.3125rem;
+
+	--radius-2lg: 0.625rem;
+	--radius-3xl: 1.25rem;
+
+	--height-screen-wo-nav: calc(100vh - var(--nav-height));
+	--height-screen-wo-header: calc(100vh - var(--header-height));
+	--height-hero: calc(var(--height-screen-wo-header) - var(--spacing) * 16);
+}

@@ -1,0 +1,89 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"slug": "background",
+					"color": "#ffffff",
+					"name": "Background"
+				},
+				{
+					"slug": "foreground",
+					"color": "#404040",
+					"name": "Foreground"
+				},
+				{
+					"slug": "primary-1",
+					"color": "#00141E",
+					"name": "Primary 1"
+				},
+				{
+					"slug": "primary-2",
+					"color": "#81ACD2",
+					"name": "Primary 2"
+				},
+				{
+					"slug": "secondary-1",
+					"color": "#EBEBEB",
+					"name": "Secondary 1"
+				},
+				{
+					"slug": "secondary-2",
+					"color": "#B9DBEF",
+					"name": "Secondary 2"
+				},
+				{
+					"slug": "secondary-3",
+					"color": "#44647D",
+					"name": "Secondary 3"
+				},
+				{
+					"slug": "secondary-4",
+					"color": "#C4BCB7",
+					"name": "Secondary 4"
+				},
+				{
+					"slug": "secondary-5",
+					"color": "#707576",
+					"name": "Secondary 5"
+				},
+				{
+					"slug": "secondary-6",
+					"color": "#3D4243",
+					"name": "Secondary 6"
+				},
+				{
+					"slug": "accent-1",
+					"color": "#AA6D43",
+					"name": "Accent 1"
+				},
+				{
+					"slug": "accent-2",
+					"color": "#50725E",
+					"name": "Accent 2"
+				},
+				{
+					"slug": "accent-3",
+					"color": "#203A2C",
+					"name": "Accent 3"
+				}
+			]
+		},
+		"layout": {
+			"contentSize": "72rem",
+			"wideSize": "90.125rem",
+			"midSize": "82rem",
+			"narrowSize": "72rem"
+		},
+		"blocks": {
+			"core/group": {
+				"background": {
+					"backgroundImage": true,
+					"backgroundSize": true
+				}
+			}
+		}
+	}
+}

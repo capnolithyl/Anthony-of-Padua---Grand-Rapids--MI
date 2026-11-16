@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-community-slider",
+	"title": "SAOP Community Slider",
+	"description": "Tabbed community posts slider sourced from selected categories.",
+	"category": "saop",
+	"icon": "images-alt",
+	"keywords": ["community", "posts", "slider"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

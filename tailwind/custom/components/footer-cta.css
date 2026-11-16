@@ -1,0 +1,90 @@
+/**
+ * Footer CTA Gravity Forms presentation.
+ *
+ * Gravity Forms' Orbital theme loads after the theme stylesheet, so the
+ * Figma-critical control styles are important and scoped to this component.
+ */
+.saop-footer-cta-form .gform_wrapper {
+	@apply m-0;
+}
+
+.saop-footer-cta-form .gform_wrapper form {
+	@apply m-0 flex flex-col items-stretch gap-4;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_body {
+	@apply m-0 min-w-0 flex-1;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_fields {
+	@apply gap-0;
+}
+
+.saop-footer-cta-form .gform_wrapper .gfield {
+	@apply m-0 min-w-0;
+}
+
+.saop-footer-cta-form .gform_wrapper .gfield_label {
+	@apply absolute! -m-px! size-px! overflow-hidden! p-0! whitespace-nowrap! [border:0]! [clip:rect(0,0,0,0)]!;
+}
+
+.saop-footer-cta-form .gform_wrapper .ginput_container_email {
+	@apply rounded-[5px]! p-[6px_9px]! [box-shadow:var(--shadow-md)]! [background:var(--color-secondary-1)]!;
+}
+
+.saop-footer-cta-form .gform_wrapper input[type="email"] {
+	@apply text-primary-1! m-0! h-[29px]! min-h-[29px]! w-full! rounded-[5px]! p-[4px_8px]! font-sans! [font-size:var(--text-sm)]! [line-height:normal]! font-normal! [box-shadow:none]! [outline:none]! [background:transparent]! [border:1px_solid_var(--color-secondary-3)]!;
+}
+
+.saop-footer-cta-form .gform_wrapper input[type="email"]::placeholder {
+	@apply text-primary-2! opacity-100!;
+}
+
+.saop-footer-cta-form .gform_wrapper input[type="email"]:focus-visible {
+	@apply outline-primary-2! outline-2! outline-offset-2!;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_footer,
+.saop-footer-cta-form .gform_wrapper .gform_page_footer {
+	@apply m-0 flex justify-end p-0;
+}
+
+.saop-footer-cta-form .gform_wrapper input[type="submit"].gform_button,
+.saop-footer-cta-form .gform_wrapper button[type="submit"].gform_button {
+	@apply min-w-[98px]!;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_ajax_spinner {
+	@apply ml-3 size-6 self-center;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_validation_errors {
+	@apply rounded-2lg mb-4 border-2 border-red-700 bg-white px-3 py-2 text-sm text-red-800 shadow-none;
+}
+
+.saop-footer-cta-form .gform_wrapper .gform_validation_errors h2 {
+	@apply m-0 font-sans text-sm leading-normal font-semibold text-red-800;
+}
+
+.saop-footer-cta-form .gform_wrapper .gfield_error input[type="email"] {
+	@apply border-red-700!;
+}
+
+.saop-footer-cta-form .gform_wrapper .validation_message {
+	@apply mt-2 text-xs font-semibold text-red-800;
+}
+
+.saop-footer-cta-form .gform_confirmation_wrapper {
+	@apply rounded-2lg border-secondary-3 text-primary-1 border-2 bg-white p-4 text-sm leading-normal;
+}
+
+@media (min-width: 1024px) {
+	.saop-footer-cta-form .gform_wrapper form {
+		@apply flex-row items-start gap-6;
+	}
+
+	.saop-footer-cta-form .gform_wrapper .gform_footer,
+	.saop-footer-cta-form .gform_wrapper .gform_page_footer {
+		@apply shrink-0;
+	}
+}

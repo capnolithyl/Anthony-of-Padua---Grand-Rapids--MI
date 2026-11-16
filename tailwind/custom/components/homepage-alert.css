@@ -1,0 +1,25 @@
+html.saop-homepage-alert-open {
+	@apply overflow-hidden;
+}
+
+.homepage-alert-trigger {
+	@apply top-[80%];
+}
+
+.homepage-alert-dialog {
+	@apply max-h-[calc(100dvh-2rem)] w-[min(1285px,calc(100%-2rem))];
+}
+
+.homepage-alert-dialog::backdrop {
+	@apply [background:rgb(0_20_30/75%)];
+}
+
+.homepage-alert-media {
+	@apply isolate;
+}
+
+@media (min-width: 64rem) {
+	.homepage-alert-media::after {
+		@apply rounded-2lg absolute top-[49px] right-[-7px] bottom-[-45px] left-[50px] -z-1 content-[''] [border:3px_solid_var(--color-accent-2)];
+	}
+}

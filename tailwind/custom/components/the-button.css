@@ -1,0 +1,45 @@
+/**
+ * Shared action-button treatment from the Figma button component.
+ *
+ * Purpose-built icon, navigation, tab and accordion controls retain their
+ * component-specific presentation because they are not action buttons.
+ * Qualify the core Button selector so later Typography link rules cannot
+ * replace its color, weight or text decoration inside `.prose` content.
+ */
+.saop-button,
+.wp-element-button,
+.wp-block-button > .wp-block-button__link,
+.wp-block-file__button,
+button[type="submit"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+a.button {
+	@apply rounded-2lg border-primary-2 bg-primary-2 hover:text-primary-2 focus-visible:outline-primary-1 inline-flex min-h-[38px] w-auto cursor-pointer appearance-none items-center justify-center gap-2.5 border-2 px-[15px] py-2 font-sans text-sm leading-normal font-semibold whitespace-nowrap text-white uppercase no-underline shadow-md transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.saop-button--outline,
+.wp-block-button.is-style-outline > .wp-block-button__link {
+	@apply border-primary-2 text-primary-2 hover:bg-primary-2 bg-white hover:text-white;
+}
+
+/**
+ * Gravity Forms' Orbital theme loads after the theme stylesheet and gives its
+ * submit controls higher-specificity dimensions. Keep only the Figma-critical
+ * declarations important so the shared component wins without affecting form
+ * layout or button positioning.
+ */
+.gform_wrapper input[type="submit"].gform_button,
+.gform_wrapper button[type="submit"].gform_button {
+	@apply rounded-2lg! min-h-[38px]! w-auto! p-[8px_15px]! font-sans! [font-size:var(--text-sm)]! [line-height:normal]! font-semibold! whitespace-nowrap! text-white! uppercase! [box-shadow:var(--shadow-md)]! [background:var(--color-primary-2)]! [border:2px_solid_var(--color-primary-2)]!;
+}
+
+.gform_wrapper input[type="submit"].gform_button:hover,
+.gform_wrapper button[type="submit"].gform_button:hover {
+	@apply text-primary-2! [background:var(--color-white)]!;
+}
+
+.gform_wrapper input[type="submit"].gform_button:focus-visible,
+.gform_wrapper button[type="submit"].gform_button:focus-visible {
+	@apply outline-primary-1! outline-2! outline-offset-2!;
+}

@@ -1,0 +1,23 @@
+/**
+ * Scroll-aware header
+ *
+ * The top bar owns the space that previously came from the header stack's
+ * flex gap. Collapsing both values lets the fixed header shrink smoothly.
+ */
+.site-content--offset-header {
+	@apply [padding-top:var(--site-header-expanded-height,12rem)];
+}
+
+[data-site-header] [data-top-bar] {
+	@apply [max-height:var(--top-bar-height,5rem)] [transform:translateY(0)] overflow-hidden opacity-100 [transition-property:max-height,margin-bottom,opacity,transform] [transition-duration:var(--default-transition-duration)] [transition-timing-function:ease];
+}
+
+[data-site-header][data-top-bar-hidden="true"] [data-top-bar] {
+	@apply pointer-events-none mb-0 max-h-0 [transform:translateY(-100%)] opacity-0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-site-header] [data-top-bar] {
+		@apply duration-[0.01ms];
+	}
+}

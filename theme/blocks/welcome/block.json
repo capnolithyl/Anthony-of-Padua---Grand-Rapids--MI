@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-welcome",
+	"title": "SAOP Welcome",
+	"description": "Split welcome section with media, copy, and buttons.",
+	"category": "saop",
+	"icon": "welcome-learn-more",
+	"keywords": ["welcome", "intro", "content"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

@@ -1,0 +1,54 @@
+/**
+ * Directory group slider layout and state.
+ */
+.saop-ministry-group-slider:not(.slick-initialized),
+.saop-staff-group-slider:not(.slick-initialized) {
+	@apply flex h-full overflow-x-auto;
+}
+
+.saop-ministry-group-slider:not(.slick-initialized) .saop-ministry-group-slide,
+.saop-staff-group-slider:not(.slick-initialized) .saop-staff-group-slide {
+	@apply flex-[0_0_50%];
+}
+
+.saop-ministry-group-slider.slick-initialized,
+.saop-ministry-group-slider .slick-list,
+.saop-ministry-group-slider .slick-track,
+.saop-ministry-group-slider .slick-slide,
+.saop-staff-group-slider.slick-initialized,
+.saop-staff-group-slider .slick-list,
+.saop-staff-group-slider .slick-track,
+.saop-staff-group-slider .slick-slide {
+	@apply h-full;
+}
+
+.saop-ministry-group-link[aria-current="location"],
+.saop-staff-group-link[aria-current="location"] {
+	@apply text-accent-2;
+}
+
+.saop-ministry-group-link[aria-current="location"]::after,
+.saop-staff-group-link[aria-current="location"]::after {
+	@apply bg-accent-2;
+}
+
+.saop-ministry-slider-arrow.slick-disabled,
+.saop-staff-slider-arrow.slick-disabled {
+	@apply pointer-events-none opacity-0;
+}
+
+@media (min-width: 48rem) {
+	.saop-ministry-group-slider:not(.slick-initialized)
+		.saop-ministry-group-slide,
+	.saop-staff-group-slider:not(.slick-initialized) .saop-staff-group-slide {
+		@apply basis-1/4;
+	}
+}
+
+@media (min-width: 64rem) {
+	.saop-ministry-group-slider:not(.slick-initialized)
+		.saop-ministry-group-slide,
+	.saop-staff-group-slider:not(.slick-initialized) .saop-staff-group-slide {
+		@apply basis-1/5;
+	}
+}

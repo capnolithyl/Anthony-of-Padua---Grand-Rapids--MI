@@ -1,0 +1,7 @@
+.wp-block-group {
+	@apply pt-7 pb-24;
+}
+
+.wp-block-group.is-style-bordered {
+	@apply rounded-2lg border-accent-2 border-3 px-4 pt-5 pb-6;
+}

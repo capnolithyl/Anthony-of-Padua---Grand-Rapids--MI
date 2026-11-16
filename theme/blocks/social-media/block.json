@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-social-media",
+	"title": "SAOP Social Media",
+	"description": "Social media section with shared icons and linked image tiles.",
+	"category": "saop",
+	"icon": "share",
+	"keywords": ["social", "gallery", "icons"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

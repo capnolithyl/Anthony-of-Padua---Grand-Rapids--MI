@@ -1,0 +1,24 @@
+/**
+ * Decorative image block style
+ */
+.wp-block-image.is-style-decorative-frame {
+	@apply relative isolate box-border pb-10 pl-8;
+}
+
+.wp-block-image.is-style-decorative-frame::before {
+	@apply border-accent-2 rounded-2lg absolute bottom-0 left-0 z-0 h-3/4 w-3/4 border-4 content-[''];
+}
+
+.wp-block-image.is-style-decorative-frame > img,
+.wp-block-image.is-style-decorative-frame > a {
+	@apply relative z-10;
+}
+
+.wp-block-image.is-style-decorative-frame > img,
+.wp-block-image.is-style-decorative-frame > a > img {
+	@apply rounded-2lg block h-auto w-full shadow-md;
+}
+
+.wp-block-image.is-style-decorative-frame figcaption {
+	@apply relative z-10;
+}

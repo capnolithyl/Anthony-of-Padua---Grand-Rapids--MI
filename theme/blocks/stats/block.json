@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-stats",
+	"title": "SAOP Stats",
+	"description": "Three-up statistics band.",
+	"category": "saop",
+	"icon": "chart-pie",
+	"keywords": ["stats", "numbers", "facts"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

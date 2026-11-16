@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-featured-bar",
+	"title": "SAOP Featured Bar",
+	"description": "Optional featured links bar beneath the hero.",
+	"category": "saop",
+	"icon": "megaphone",
+	"keywords": ["featured", "bar", "links"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["full", "wide"]
+	}
+}

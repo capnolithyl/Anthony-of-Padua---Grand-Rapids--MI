@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "acf/saop-featured-links",
+	"title": "SAOP Featured Links",
+	"description": "Two-column section with icon links and a content panel over an image.",
+	"category": "saop",
+	"icon": "admin-links",
+	"keywords": ["links", "icons", "feature"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"blockVersion": 3
+	},
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"]
+	}
+}

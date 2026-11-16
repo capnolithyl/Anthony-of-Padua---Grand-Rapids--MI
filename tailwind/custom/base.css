@@ -1,0 +1,46 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `base` layer
+ */
+
+/**
+ * This uses the background and foreground colors declared in the `theme.json`
+ * file and is applied both to the front end and in the block editor.
+ */
+:root {
+	--admin-bar-height: 0px;
+	--nav-height: 65px;
+	--header-height: calc(var(--nav-height) + var(--admin-bar-height));
+
+	@media (min-width: 1024px) {
+		--nav-height: 93px;
+	}
+
+	@media (min-width: 1200px) {
+		--nav-height: 143px;
+	}
+
+	&:has(#wpadminbar) {
+		--admin-bar-height: 32px;
+
+		@media (max-width: 782px) {
+			--admin-bar-height: 46px;
+		}
+	}
+}
+
+html {
+	@apply scroll-smooth;
+}
+
+body {
+	@apply bg-background text-foreground font-sans;
+}
+
+h1,
+h2 {
+	@apply font-heading;
+}
+
+h1 {
+	@apply text-primary-1 text-3xl md:text-4xl xl:text-5xl;
+}

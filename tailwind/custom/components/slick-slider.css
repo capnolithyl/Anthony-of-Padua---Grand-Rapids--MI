@@ -1,0 +1,75 @@
+/**
+ * Shared Slick carousel arrows.
+ *
+ * Keep these selectors more specific than Slick's separately enqueued theme
+ * stylesheet so every generated or custom arrow uses the same control.
+ */
+button.slick-arrow {
+	@apply bg-accent-1 box-border flex size-10 cursor-pointer items-center justify-center rounded-[9999px] p-0 text-transparent [border:3px_solid_var(--color-background)];
+}
+
+button.slick-arrow:hover,
+button.slick-arrow:focus {
+	@apply bg-accent-1 text-transparent;
+}
+
+button.slick-arrow:focus-visible {
+	@apply outline-primary-2 outline-2 outline-offset-2;
+}
+
+button.slick-prev::before,
+button.slick-next::before {
+	@apply block size-6 flex-[0_0_1.5rem];
+}
+
+button.slick-arrow > img {
+	@apply block size-4 flex-[0_0_1rem];
+}
+
+button.slick-prev,
+button.slick-next {
+	@apply z-20;
+}
+
+button.slick-prev {
+	@apply left-4;
+}
+
+button.slick-next {
+	@apply right-4;
+}
+
+button.slick-prev::before,
+button.slick-next::before {
+	@apply opacity-100 content-[''];
+	background: url("./assets/img/ministry-slider-arrow.svg") center / 1rem 1rem
+		no-repeat;
+}
+
+button.slick-prev::before {
+	@apply [transform:rotate(180deg)];
+}
+
+[dir="rtl"] button.slick-prev {
+	@apply right-4 left-auto;
+}
+
+[dir="rtl"] button.slick-next {
+	@apply right-auto left-4;
+}
+
+[dir="rtl"] button.slick-prev::before {
+	@apply [transform:none];
+}
+
+[dir="rtl"] button.slick-next::before {
+	@apply [transform:rotate(180deg)];
+}
+
+[data-hero-slider] .slick-next {
+	@apply right-6;
+}
+
+[data-hero-slider] .slick-prev {
+	@apply left-6;
+}
