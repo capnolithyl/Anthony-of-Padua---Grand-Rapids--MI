@@ -5,18 +5,34 @@
  *
  * @package St._Anthony_of_Padua
  */
-if (get_field("is_manual")) :
+$is_manual = (bool) get_field('is_manual');
+$staff_id  = 0;
+$photo_id  = 0;
+$photo_url = '';
+$bio_url   = '';
+$biography = '';
 
-	$name      = get_field("staff_member_name");
-	$position  = get_field("staff_member_position");
-	$email     = sanitize_email(get_field("staff_member_email"));
-	$phone     = get_field("staff_member_phone");
-	$phone_uri = saop_get_staff_phone_href($phone);
-	// $bio_url   = saop_get_staff_bio_url($staff_id);
-	$dialog_id = wp_unique_id('staff-bio-' . $name . '-');
+if ($is_manual) {
+	$name      = sanitize_text_field((string) get_field('staff_member_name'));
+	$position  = sanitize_text_field((string) get_field('staff_member_position'));
+	$email     = sanitize_email((string) get_field('staff_member_email_address'));
+	$phone     = sanitize_text_field((string) get_field('staff_member_phone_number'));
+	$biography = (string) get_field('staff_member_biography');
+	$photo     = get_field('staff_member_photo');
 
-else :
+	// Support each of ACF's image return formats: array, attachment ID, or URL.
+	if (is_array($photo)) {
+		$photo_id  = absint($photo['ID'] ?? $photo['id'] ?? 0);
+		$photo_url = isset($photo['url']) && is_string($photo['url']) ? $photo['url'] : '';
+	} elseif (is_numeric($photo)) {
+		$photo_id = absint($photo);
+	} elseif (is_string($photo)) {
+		$photo_url = $photo;
+	}
 
+	$has_bio   = '' !== trim(wp_strip_all_tags($biography));
+	$dialog_id = wp_unique_id('staff-bio-manual-');
+} else {
 	$staff_member = get_field('staff_member');
 	$staff_id     = $staff_member instanceof WP_Post ? $staff_member->ID : absint($staff_member);
 
@@ -27,12 +43,12 @@ else :
 					'class' => 'not-prose flex min-h-44 w-full max-w-63.25 items-center justify-center rounded-2lg border-2 border-dashed border-secondary-4 bg-secondary-1 p-6 text-center text-sm text-secondary-6',
 				)
 			);
-?>
+			?>
 			<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated block attributes.
 					?>>
 				<?php esc_html_e('Choose a staff member to display.', 'saop'); ?>
 			</div>
-<?php
+			<?php
 		}
 
 		return;
@@ -42,11 +58,13 @@ else :
 	$position  = saop_get_staff_field('staff_position', $staff_id);
 	$email     = sanitize_email(saop_get_staff_field('staff_email', $staff_id));
 	$phone     = saop_get_staff_field('staff_phone', $staff_id);
-	$phone_uri = saop_get_staff_phone_href($phone);
+	$photo_id  = get_post_thumbnail_id($staff_id);
 	$bio_url   = saop_get_staff_bio_url($staff_id);
+	$has_bio   = (bool) $bio_url;
 	$dialog_id = wp_unique_id('staff-bio-' . $staff_id . '-');
+}
 
-endif;
+$phone_uri = saop_get_staff_phone_href($phone);
 
 wp_enqueue_script('saop-staff-directory');
 
@@ -61,17 +79,22 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <article <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated block attributes.
 			?>>
 	<div class="relative h-66.75 overflow-hidden bg-secondary-3">
-		<?php if (has_post_thumbnail($staff_id)) : ?>
+		<?php if ($photo_id) : ?>
 			<?php
-			echo get_the_post_thumbnail(
-				$staff_id,
+			echo wp_get_attachment_image(
+				$photo_id,
 				'large',
+				false,
 				array(
 					'class'   => 'absolute inset-0 h-full w-full object-cover',
 					'loading' => 'lazy',
 				)
 			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated attachment markup.
 			?>
+		<?php elseif ($photo_url) : ?>
+			<img src="<?php echo esc_url($photo_url); ?>"
+				alt="<?php echo esc_attr($name); ?>"
+				class="absolute inset-0 h-full w-full object-cover" loading="lazy">
 		<?php endif; ?>
 	</div>
 
@@ -110,12 +133,22 @@ $wrapper_attributes = get_block_wrapper_attributes(
 					<span></span>
 				<?php endif; ?>
 
-				<?php if ($bio_url) : ?>
-					<a class="uppercase hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-2"
-						href="<?php echo esc_url($bio_url); ?>" aria-controls="<?php echo esc_attr($dialog_id); ?>"
-						aria-haspopup="dialog" data-staff-bio-trigger="<?php echo esc_attr($staff_id); ?>">
-						<?php esc_html_e('Bio', 'saop'); ?>
-					</a>
+				<?php if ($has_bio) : ?>
+					<?php if ($is_manual) : ?>
+						<button type="button"
+							class="uppercase hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-2"
+							aria-controls="<?php echo esc_attr($dialog_id); ?>"
+							aria-haspopup="dialog"
+							data-staff-bio-trigger="<?php echo esc_attr($dialog_id); ?>">
+							<?php esc_html_e('Bio', 'saop'); ?>
+						</button>
+					<?php else : ?>
+						<a class="uppercase hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-2"
+							href="<?php echo esc_url($bio_url); ?>" aria-controls="<?php echo esc_attr($dialog_id); ?>"
+							aria-haspopup="dialog" data-staff-bio-trigger="<?php echo esc_attr($staff_id); ?>">
+							<?php esc_html_e('Bio', 'saop'); ?>
+						</a>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -126,8 +159,19 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		'template-parts/content/content',
 		'staff-dialog',
 		array(
-			'staff_id'  => $staff_id,
-			'dialog_id' => $dialog_id,
+			'staff_id'    => $staff_id,
+			'dialog_id'   => $dialog_id,
+			'manual_staff' => $is_manual
+				? array(
+					'name'       => $name,
+					'position'   => $position,
+					'email'      => $email,
+					'phone'      => $phone,
+					'biography'  => $biography,
+					'photo_id'   => $photo_id,
+					'photo_url'  => $photo_url,
+				)
+				: null,
 		)
 	);
 	?>
