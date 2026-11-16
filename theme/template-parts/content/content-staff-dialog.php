@@ -5,26 +5,32 @@
  * @package St._Anthony_of_Padua
  */
 
-$staff_id    = ! empty( $args['staff_id'] ) ? absint( $args['staff_id'] ) : get_the_ID();
-$staff       = get_post( $staff_id );
-$name        = get_the_title( $staff_id );
-$position    = saop_get_staff_field( 'staff_position', $staff_id );
-$email       = sanitize_email( saop_get_staff_field( 'staff_email', $staff_id ) );
-$phone       = saop_get_staff_field( 'staff_phone', $staff_id );
-$phone_uri   = saop_get_staff_phone_href( $phone );
-$dialog_id   = ! empty( $args['dialog_id'] )
-	? sanitize_html_class( $args['dialog_id'] )
+$manual_staff = ! empty($args['manual_staff']) && is_array($args['manual_staff'])
+	? $args['manual_staff']
+	: null;
+$is_manual = null !== $manual_staff;
+$staff_id  = $is_manual ? 0 : (! empty($args['staff_id']) ? absint($args['staff_id']) : get_the_ID());
+$staff     = $is_manual ? null : get_post($staff_id);
+$name      = $is_manual ? (string) ($manual_staff['name'] ?? '') : get_the_title($staff_id);
+$position  = $is_manual ? (string) ($manual_staff['position'] ?? '') : saop_get_staff_field('staff_position', $staff_id);
+$email     = $is_manual ? sanitize_email((string) ($manual_staff['email'] ?? '')) : sanitize_email(saop_get_staff_field('staff_email', $staff_id));
+$phone     = $is_manual ? (string) ($manual_staff['phone'] ?? '') : saop_get_staff_field('staff_phone', $staff_id);
+$phone_uri = saop_get_staff_phone_href($phone);
+$photo_id  = $is_manual ? absint($manual_staff['photo_id'] ?? 0) : get_post_thumbnail_id($staff_id);
+$photo_url = $is_manual ? (string) ($manual_staff['photo_url'] ?? '') : '';
+$dialog_id = ! empty($args['dialog_id'])
+	? sanitize_html_class($args['dialog_id'])
 	: 'staff-bio-' . $staff_id;
 $title_id    = $dialog_id . '-title';
 $close_label = sprintf(
 	/* translators: %s: Staff member name. */
-	__( 'Close biography for %s', 'saop' ),
+	__('Close biography for %s', 'saop'),
 	$name
 );
 
-$content = $staff instanceof WP_Post
-	? apply_filters( 'the_content', $staff->post_content )
-	: '';
+$content = $is_manual
+	? wpautop(wp_kses_post((string) ($manual_staff['biography'] ?? '')))
+	: ($staff instanceof WP_Post ? apply_filters('the_content', $staff->post_content) : '');
 ?>
 
 <dialog id="<?php echo esc_attr( $dialog_id ); ?>"
@@ -47,7 +53,7 @@ $content = $staff instanceof WP_Post
 			</h2>
 
 			<div class="relative mt-5 aspect-393/486 w-full overflow-hidden rounded-3xl bg-secondary-3 shadow-md lg:mt-6.75 lg:aspect-auto lg:h-121.5">
-				<?php if ( has_post_thumbnail( $staff_id ) ) : ?>
+				<?php if (! $is_manual && has_post_thumbnail($staff_id)) : ?>
 					<?php
 					echo get_the_post_thumbnail(
 						$staff_id,
@@ -58,6 +64,22 @@ $content = $staff instanceof WP_Post
 						)
 					); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated attachment markup.
 					?>
+				<?php elseif ($photo_id) : ?>
+					<?php
+					echo wp_get_attachment_image(
+						$photo_id,
+						'large',
+						false,
+						array(
+							'class'   => 'absolute inset-0 h-full w-full object-cover',
+							'loading' => 'lazy',
+						)
+					); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core-generated attachment markup.
+					?>
+				<?php elseif ($photo_url) : ?>
+					<img src="<?php echo esc_url($photo_url); ?>"
+						alt="<?php echo esc_attr($name); ?>"
+						class="absolute inset-0 h-full w-full object-cover" loading="lazy">
 				<?php endif; ?>
 			</div>
 
